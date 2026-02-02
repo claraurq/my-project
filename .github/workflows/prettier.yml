@@ -1,0 +1,25 @@
+#Crea un workflow que formatee el código usando Prettier:
+#•	Se ejecutará en cada push.
+#•	Instalará node v20 usando la acción predefinida para ello.
+#•	Instalará Prettier. usando npminstall -g prettier.
+#•	Mostrará los archivos que cambiaría (sin modificar nada).(usa el comando prettier . --check)
+
+name: formatear con prettier
+on: [push]
+jobs:
+  formatear_codigo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js v20
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Instalar Prettier
+        run: npm install -g prettier
+
+      - name: Mostrar archivos que cambiaría Prettier
+        run: prettier . --check
