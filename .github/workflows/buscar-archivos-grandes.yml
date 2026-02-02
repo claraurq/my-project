@@ -1,0 +1,24 @@
+#Crea un workflow que:
+#•	Se ejecute siempre que se haga push.
+#•	Clone los archivos del repositorio con la acción predefinida.
+#•	Busque archivos mayores de 1 MB.
+#•	Si encuentra alguno, debe mostrar un aviso por consola (no fallar el job).
+name: buscar archivos grandes
+on: [push]
+jobs:
+  buscar_archivos:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+      - name: Buscar archivos mayores de 1MB
+        run: |
+          encontrados=$(find . -type f -size +1M)
+          if [ -n "$encontrados" ]; then
+            echo "Aviso: Se han encontrado archivos mayores de 1MB:"
+            echo "$encontrados"
+          else
+            echo "No se han encontrado archivos mayores de 1MB."
+          fi
+      
+        
