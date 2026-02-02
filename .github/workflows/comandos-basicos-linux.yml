@@ -1,0 +1,27 @@
+#Crea un workflow que se ejecute cuando se haga push de un archivo nuevo en la carpeta scripts/ y que:
+#•	Clone los archivos de repositorio usando la accion predefinida para ello.
+#•	Liste los archivos del repositorio.
+#•	Muestre la versión del sistema operativo.
+#•	Imprima la fecha actual.
+
+
+name: comandos basicos linux
+on:
+  push:
+    paths:
+      - 'scripts/**'
+jobs:
+  ejecutar_comandos:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Listar archivos del repositorio
+        run: ls -la
+
+      - name: Mostrar versión del sistema operativo
+        run: lsb_release -a
+
+      - name: Imprimir fecha actual
+        run: date
