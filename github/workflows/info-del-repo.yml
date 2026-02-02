@@ -1,0 +1,19 @@
+#Crea un workflow que se lance al hacer push y que muestre:
+#•	El nombre del repositorio
+#•	El usuario que ha hecho push
+#•	La rama donde se ha hecho push
+#El workflow se ejecutara sobre una maquina ubuntu-lattest
+
+name: info del repo
+on: [push]
+
+jobs:
+  mostrar_info:
+    runs-on: ubuntu-lattest
+    steps:
+      - name: Mostrar nombre repo
+        run: echo "el repo se llama ${{ github.repository }}"
+      - name: Mostrar usuario pusheando
+        run: echo "el usuario que ha hecho push es ${{ github.actor }}"
+      - name: Mostrar rama pusheando
+        run: echo "la rama donde se ha hecho push es ${{ github.ref }}"
